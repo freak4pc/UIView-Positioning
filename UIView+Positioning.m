@@ -7,6 +7,9 @@
 
 #import "UIView+Positioning.h"
 
+#define SCREEN_SCALE                    ([[UIScreen mainScreen] scale])
+#define PIXEL_INTEGRAL(pointValue)      (roundf(pointValue * SCREEN_SCALE) / SCREEN_SCALE)
+
 @implementation UIView (Positioning)
 @dynamic x, y, width, height, origin, size;
 
@@ -140,14 +143,14 @@
         switch ([UIApplication sharedApplication].statusBarOrientation){
             case UIInterfaceOrientationLandscapeLeft:
             case UIInterfaceOrientationLandscapeRight:{
-                self.x  =   (self.superview.height / 2) - (self.width / 2);
-                self.y  =   (self.superview.width / 2) - (self.height / 2);
+                self.x  =   PIXEL_INTEGRAL((self.superview.height / 2.0f) - (self.width / 2.0f));
+                self.y  =   PIXEL_INTEGRAL((self.superview.width / 2.0f) - (self.height / 2.0f));
                 break;
             }
             case UIInterfaceOrientationPortrait:
             case UIInterfaceOrientationPortraitUpsideDown:{
-                self.x  =   (self.superview.width / 2) - (self.width / 2);
-                self.y  =   (self.superview.height / 2) - (self.height / 2);
+                self.x  =   PIXEL_INTEGRAL((self.superview.width / 2.0f) - (self.width / 2.0f));
+                self.y  =   PIXEL_INTEGRAL((self.superview.height / 2.0f) - (self.height / 2.0f));
                 break;
             }
         }
