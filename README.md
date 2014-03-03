@@ -1,6 +1,6 @@
 UIView-Positioning
 ================
-**UIView+Positioning** provides easy shorthand methods to defining the frame properties (width, height, x, y) of any UIView based object in an easy fashion, as well as extra helpful properties and methods.
+**UIView+Positioning** is an Objective-C Category which provides easy shorthand methods to defining the frame properties (width, height, x, y) of any UIView based object in an easy fashion, as well as extra helpful properties and methods.
 
 USAGE
 -----
@@ -27,6 +27,10 @@ NSLog(@"%f", btntest.lastSubviewOnY.y); // Y value of the object with the larges
 [btnTest centerToParent]; // Centers button to its parent view, if exists
 ```
 
+PORTS
+-----
+* [UIView+Positioning for Xamarin] by [Cameron Ray (@camray)]
+
 LICENSE
 -------------------
 
@@ -49,3 +53,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+[UIView+Positioning for Xamarin]:https://github.com/camray/Xamarin-UIView-Positioning
+[Cameron Ray (@camray)]:https://github.com/camray
