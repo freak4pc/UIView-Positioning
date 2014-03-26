@@ -7,31 +7,34 @@
 
 #import "UIView+Positioning.h"
 
+#define SCREEN_SCALE                    ([[UIScreen mainScreen] scale])
+#define PIXEL_INTEGRAL(pointValue)      (round(pointValue * SCREEN_SCALE) / SCREEN_SCALE)
+
 @implementation UIView (Positioning)
 @dynamic x, y, width, height, origin, size;
 
 // Setters
 -(void)setX:(CGFloat)x{
     CGRect r        = self.frame;
-    r.origin.x      = x;
+    r.origin.x      = PIXEL_INTEGRAL(x);
     self.frame      = r;
 }
 
 -(void)setY:(CGFloat)y{
     CGRect r        = self.frame;
-    r.origin.y      = y;
+    r.origin.y      = PIXEL_INTEGRAL(y);
     self.frame      = r;
 }
 
 -(void)setWidth:(CGFloat)width{
     CGRect r        = self.frame;
-    r.size.width    = width;
+    r.size.width    = PIXEL_INTEGRAL(width);
     self.frame      = r;
 }
 
 -(void)setHeight:(CGFloat)height{
     CGRect r        = self.frame;
-    r.size.height   = height;
+    r.size.height   = PIXEL_INTEGRAL(height);
     self.frame      = r;
 }
 
@@ -46,15 +49,11 @@
 }
 
 -(void)setRight:(CGFloat)right {
-    CGRect frame = self.frame;
-    frame.origin.x = right - frame.size.width;
-    self.frame = frame;
+    self.x = right - self.width;
 }
 
 -(void)setBottom:(CGFloat)bottom {
-    CGRect frame = self.frame;
-    frame.origin.y = bottom - frame.size.height;
-    self.frame = frame;
+    self.y = bottom - self.height;
 }
 
 -(void)setCenterX:(CGFloat)centerX {
@@ -109,28 +108,28 @@
 -(UIView *)lastSubviewOnX{
     if(self.subviews.count > 0){
         UIView *outView = self.subviews[0];
-        
+
         for(UIView *v in self.subviews)
             if(v.x > outView.x)
                 outView = v;
-        
+
         return outView;
     }
-    
+
     return nil;
 }
 
 -(UIView *)lastSubviewOnY{
     if(self.subviews.count > 0){
         UIView *outView = self.subviews[0];
-        
+
         for(UIView *v in self.subviews)
             if(v.y > outView.y)
                 outView = v;
-        
+
         return outView;
     }
-    
+
     return nil;
 }
 
@@ -140,14 +139,14 @@
         switch ([UIApplication sharedApplication].statusBarOrientation){
             case UIInterfaceOrientationLandscapeLeft:
             case UIInterfaceOrientationLandscapeRight:{
-                self.x  =   (self.superview.height / 2) - (self.width / 2);
-                self.y  =   (self.superview.width / 2) - (self.height / 2);
+                self.x  =   PIXEL_INTEGRAL((self.superview.height / 2.0) - (self.width / 2.0));
+                self.y  =   PIXEL_INTEGRAL((self.superview.width / 2.0) - (self.height / 2.0));
                 break;
             }
             case UIInterfaceOrientationPortrait:
             case UIInterfaceOrientationPortraitUpsideDown:{
-                self.x  =   (self.superview.width / 2) - (self.width / 2);
-                self.y  =   (self.superview.height / 2) - (self.height / 2);
+                self.x  =   PIXEL_INTEGRAL((self.superview.width / 2.0) - (self.width / 2.0));
+                self.y  =   PIXEL_INTEGRAL((self.superview.height / 2.0) - (self.height / 2.0));
                 break;
             }
         }
@@ -155,4 +154,4 @@
 }
 
 @end
-    
+
