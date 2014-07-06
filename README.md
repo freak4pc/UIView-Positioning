@@ -27,6 +27,12 @@ NSLog(@"%f", btntest.lastSubviewOnY.y); // Y value of the object with the larges
 [btnTest centerToParent]; // Centers button to its parent view, if exists
 ```
 
+INSTALL
+-----
+```
+pod "UIView+Positioning"
+```
+
 PORTS
 -----
 * [UIView+Positioning for Xamarin] by [Cameron Ray (@camray)]
