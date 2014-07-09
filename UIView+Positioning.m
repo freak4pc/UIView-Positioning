@@ -134,12 +134,13 @@
 }
 
 // Methods
--(void)centerToParent{
-    if (!self.superview) {
-        return;
+- (void)centerToParent {
+    if (!self.superview) {
+        return;
     }
-    self.x = (self.superview.width / 2.0) - (self.width / 2.0);
-    self.y = (self.superview.height / 2.0) - (self.height / 2.0);
+    
+    self.x = (self.superview.height / 2.0) - (self.width / 2.0);
+    self.y = (self.superview.height / 2.0) - (self.height / 2.0);
 }
 
 @end
