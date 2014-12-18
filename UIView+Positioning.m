@@ -105,7 +105,7 @@
     return self.center.y;
 }
 
--(UIView *)lastSubviewOnX{
+-(UIView *)lastSubviewOnX {
     if(self.subviews.count > 0){
         UIView *outView = self.subviews[0];
 
@@ -119,7 +119,7 @@
     return nil;
 }
 
--(UIView *)lastSubviewOnY{
+-(UIView *)lastSubviewOnY {
     if(self.subviews.count > 0){
         UIView *outView = self.subviews[0];
 
@@ -134,24 +134,13 @@
 }
 
 // Methods
--(void)centerToParent{
-    if(self.superview){
-        switch ([UIApplication sharedApplication].statusBarOrientation){
-            case UIInterfaceOrientationLandscapeLeft:
-            case UIInterfaceOrientationLandscapeRight:{
-                self.x  =   PIXEL_INTEGRAL((self.superview.height / 2.0) - (self.width / 2.0));
-                self.y  =   PIXEL_INTEGRAL((self.superview.width / 2.0) - (self.height / 2.0));
-                break;
-            }
-            case UIInterfaceOrientationPortrait:
-            case UIInterfaceOrientationPortraitUpsideDown:{
-                self.x  =   PIXEL_INTEGRAL((self.superview.width / 2.0) - (self.width / 2.0));
-                self.y  =   PIXEL_INTEGRAL((self.superview.height / 2.0) - (self.height / 2.0));
-                break;
-            }
-        }
+- (void)centerToParent {
+    if (!self.superview) {
+        return;
     }
+    
+    self.x = (self.superview.height / 2.0) - (self.width / 2.0);
+    self.y = (self.superview.height / 2.0) - (self.height / 2.0);
 }
 
 @end
-
