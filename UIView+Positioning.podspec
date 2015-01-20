@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "UIView+Positioning"
-  s.version      = "1.0.1"
+  s.version      = "1.1"
   s.summary      = "UIView+Positioning provides shorthand methods to defining the frame properties of any UIView based object in an easy fashion."
 
   s.description  = <<-DESC
@@ -40,9 +40,9 @@ Pod::Spec.new do |s|
   s.author       = { "Shai Mishali" => "freak4pc@gmail.com" }
 
   s.platform     = :ios
-  s.source       = { :git => "https://github.com/freak4pc/UIView-Positioning.git", :tag => "v1.0.1" }
+  s.source       = { :git => "https://github.com/freak4pc/UIView-Positioning.git", :tag => "v1.1" }
 
-  s.source_files  = 'UIView+Positioning.**'
+  s.source_files  = 'UIView+Positioning.{h,m}'
 
   s.requires_arc  = true
 end

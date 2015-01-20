@@ -12,30 +12,23 @@
 
 @implementation UIView (Positioning)
 @dynamic x, y, width, height, origin, size;
+@dynamic boundsWidth, boundsHeight, boundsX, boundsY;
 
 // Setters
 -(void)setX:(CGFloat)x{
-    CGRect r        = self.frame;
-    r.origin.x      = PIXEL_INTEGRAL(x);
-    self.frame      = r;
+    self.frame      = CGRectMake(PIXEL_INTEGRAL(x), self.y, self.width, self.height);
 }
 
 -(void)setY:(CGFloat)y{
-    CGRect r        = self.frame;
-    r.origin.y      = PIXEL_INTEGRAL(y);
-    self.frame      = r;
+    self.frame      = CGRectMake(self.x, PIXEL_INTEGRAL(y), self.width, self.height);
 }
 
 -(void)setWidth:(CGFloat)width{
-    CGRect r        = self.frame;
-    r.size.width    = PIXEL_INTEGRAL(width);
-    self.frame      = r;
+    self.frame      = CGRectMake(self.x, self.y, PIXEL_INTEGRAL(width), self.height);
 }
 
 -(void)setHeight:(CGFloat)height{
-    CGRect r        = self.frame;
-    r.size.height   = PIXEL_INTEGRAL(height);
-    self.frame      = r;
+    self.frame      = CGRectMake(self.x, self.y, self.width, PIXEL_INTEGRAL(height));
 }
 
 -(void)setOrigin:(CGPoint)origin{
@@ -49,19 +42,43 @@
 }
 
 -(void)setRight:(CGFloat)right {
-    self.x = right - self.width;
+    self.x          = right - self.width;
 }
 
 -(void)setBottom:(CGFloat)bottom {
-    self.y = bottom - self.height;
+    self.y          = bottom - self.height;
+}
+
+-(void)setLeft:(CGFloat)left{
+    self.x          = left;
+}
+
+-(void)setTop:(CGFloat)top{
+    self.y          = top;
 }
 
 -(void)setCenterX:(CGFloat)centerX {
-    self.center = CGPointMake(centerX, self.center.y);
+    self.center     = CGPointMake(PIXEL_INTEGRAL(centerX), self.center.y);
 }
 
 -(void)setCenterY:(CGFloat)centerY {
-    self.center = CGPointMake(self.center.x, centerY);
+    self.center     = CGPointMake(self.center.x, PIXEL_INTEGRAL(centerY));
+}
+
+-(void)setBoundsX:(CGFloat)boundsX{
+    self.bounds     = CGRectMake(PIXEL_INTEGRAL(boundsX), self.boundsY, self.boundsWidth, self.boundsHeight);
+}
+
+-(void)setBoundsY:(CGFloat)boundsY{
+    self.bounds     = CGRectMake(self.boundsX, PIXEL_INTEGRAL(boundsY), self.boundsWidth, self.boundsHeight);
+}
+
+-(void)setBoundsWidth:(CGFloat)boundsWidth{
+    self.bounds     = CGRectMake(self.boundsX, self.boundsY, PIXEL_INTEGRAL(boundsWidth), self.boundsHeight);
+}
+
+-(void)setBoundsHeight:(CGFloat)boundsHeight{
+    self.bounds     = CGRectMake(self.boundsX, self.boundsY, self.boundsWidth, PIXEL_INTEGRAL(boundsHeight));
 }
 
 // Getters
@@ -97,6 +114,14 @@
     return self.frame.origin.y + self.frame.size.height;
 }
 
+-(CGFloat)left{
+    return self.x;
+}
+
+-(CGFloat)top{
+    return self.y;
+}
+
 -(CGFloat)centerX {
     return self.center.x;
 }
@@ -108,29 +133,45 @@
 -(UIView *)lastSubviewOnX{
     if(self.subviews.count > 0){
         UIView *outView = self.subviews[0];
-
+        
         for(UIView *v in self.subviews)
             if(v.x > outView.x)
                 outView = v;
-
+        
         return outView;
     }
-
+    
     return nil;
 }
 
 -(UIView *)lastSubviewOnY{
     if(self.subviews.count > 0){
         UIView *outView = self.subviews[0];
-
+        
         for(UIView *v in self.subviews)
             if(v.y > outView.y)
                 outView = v;
-
+        
         return outView;
     }
-
+    
     return nil;
+}
+
+-(CGFloat)boundsX{
+    return self.bounds.origin.x;
+}
+
+-(CGFloat)boundsY{
+    return self.bounds.origin.y;
+}
+
+-(CGFloat)boundsWidth{
+    return self.bounds.size.width;
+}
+
+-(CGFloat)boundsHeight{
+    return self.bounds.size.height;
 }
 
 // Methods
@@ -139,19 +180,20 @@
         switch ([UIApplication sharedApplication].statusBarOrientation){
             case UIInterfaceOrientationLandscapeLeft:
             case UIInterfaceOrientationLandscapeRight:{
-                self.x  =   PIXEL_INTEGRAL((self.superview.height / 2.0) - (self.width / 2.0));
-                self.y  =   PIXEL_INTEGRAL((self.superview.width / 2.0) - (self.height / 2.0));
+                self.origin     = CGPointMake((self.superview.height / 2.0) - (self.width / 2.0),
+                                              (self.superview.width / 2.0) - (self.height / 2.0));
                 break;
             }
             case UIInterfaceOrientationPortrait:
             case UIInterfaceOrientationPortraitUpsideDown:{
-                self.x  =   PIXEL_INTEGRAL((self.superview.width / 2.0) - (self.width / 2.0));
-                self.y  =   PIXEL_INTEGRAL((self.superview.height / 2.0) - (self.height / 2.0));
+                self.origin     = CGPointMake((self.superview.width / 2.0) - (self.width / 2.0),
+                                              (self.superview.height / 2.0) - (self.height / 2.0));
                 break;
             }
+            case UIInterfaceOrientationUnknown:
+                return;
         }
     }
 }
 
 @end
-

@@ -31,11 +31,17 @@
 /** View's size - Sets Width and Height */
 @property (nonatomic, assign) CGSize    size;
 
-/** Y vale representing the bottom of the view **/
+/** Y value representing the bottom of the view **/
 @property (nonatomic, assign) CGFloat   bottom;
 
 /** X Value representing the right side of the view **/
 @property (nonatomic, assign) CGFloat   right;
+
+/** X Value representing the top of the view (alias of x) **/
+@property (nonatomic, assign) CGFloat   left;
+
+/** Y Value representing the top of the view (alias of y) **/
+@property (nonatomic, assign) CGFloat   top;
 
 /** X value of the object's center **/
 @property (nonatomic, assign) CGFloat   centerX;
@@ -48,6 +54,18 @@
 
 /** Returns the Subview with the heighest Y value **/
 @property (nonatomic, strong, readonly) UIView *lastSubviewOnY;
+
+/** View's bounds X value **/
+@property (nonatomic, assign) CGFloat   boundsX;
+
+/** View's bounds Y value **/
+@property (nonatomic, assign) CGFloat   boundsY;
+
+/** View's bounds width **/
+@property (nonatomic, assign) CGFloat   boundsWidth;
+
+/** View's bounds height **/
+@property (nonatomic, assign) CGFloat   boundsHeight;
 
 /** 
  Centers the view to its parent view (if exists) 
