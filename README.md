@@ -1,50 +1,50 @@
 UIView-Positioning
 ================
-**UIView+Positioning** is an Objective-C Category which provides easy shorthand methods to defining the frame properties (width, height, x, y) of any UIView based object in an easy fashion, as well as extra helpful properties and methods.
+**UIView+Positioning** is a Swift Extension which provides easy shorthand methods to defining the frame properties (width, height, x, y) of any UIView based object in an easy fashion, as well as extra helpful properties and methods.
 
-Swift
+Objective-C
 -----
-A pure-Swift version is available in the ['swift' branch]. If you're currently targeting iOS >= 7, you might as well use the Swift version which will most likely replace the Objecive-C version as time passes by.
+An Objective-C version is available in the ['master' branch]. If you're currently targeting iOS >= 7, you might as well use the Swift version which will most likely replace the Objecive-C version as time passes by.
 
 USAGE
 -----
 Just use the properties **x**, **y**, **width**, **height** or use **origin** and **size** to kill two birds with one stone ;-)
 
-```objc
-UIButton *btnTest; // Or any other view
+```swift
+let btnTest     = UIButton()        // Or any other view
 
-btnTest.width   = 250;
-btnTest.height  = 100;
+btnTest.width   = 250
+btnTest.height  = 100
 
-btnTest.y      -= 100;
-btnTest.x      += 35;
+btnTest.y      -= 100
+btnTest.x      += 35
 
-btnTest.centerX = 20;
-btnTest.centerY = 15;
+btnTest.centerX = 20
+btnTest.centerY = 15
 
-btnTest.size    = CGSizeMake(150, 70);
-btnTest.origin  = CGPointMake(25, 10);
+btnTest.size    = CGSizeMake(150, 70)
+btnTest.origin  = CGPointMake(25, 10)
 
-NSLog(@"%f", btnTest.lastSubviewOnX.x); // X value of the object with the largest X value
-NSLog(@"%f", btntest.lastSubviewOnY.y); // Y value of the object with the largest Y value
+println(btnTest.lastSubviewOnX?.x)  // X value of the object with the largest X value
+println(btnTest.lastSubviewOnY?.y)  // Y value of the object with the largest Y value
 
-[btnTest centerToParent]; // Centers button to its parent view, if exists
+btnTest.centerToParent()            // Centers button to its parent view, if exists
 ```
 
 Here's another short example of using **centerToParent** and the Fibonacci Series to create multiple subviewed squares
-```objc
-__weak UIView *currentView  = self.view;
-CGFloat currentSize         = 300;
+```swift
+weak var currentView            = self.view
+var currentSize:CGFloat         = 300
 
-for(uint i=0; i <= 12; i++){
-    UIView *newView         = [UIView new];
-    newView.size            = CGSizeMake(currentSize, currentSize);
-    newView.backgroundColor = [UIColor randomColor];
-    [currentView addSubview: newView];
-    [newView centerToParent];
+for i in 0...12{
+    let newView                 = UIView()
+    newView.size                = CGSizeMake(currentSize, currentSize)
+    newView.backgroundColor     = UIColor.randomColor()
+    currentView?.addSubview(newView)
+    newView.centerToParent()
 
-    currentView             = newView;
-    currentSize            -= ([self fibonacci: i+6] / 10);
+    currentView                 = newView
+    currentSize                -= CGFloat(self.fibonacci(i+6) / 10)
 }
 ```
 
@@ -93,4 +93,4 @@ THE SOFTWARE.
 
 [UIView+Positioning for Xamarin]:https://github.com/camray/Xamarin-UIView-Positioning
 [Cameron Ray (@camray)]:https://github.com/camray
-['swift' branch]:https://github.com/freak4pc/UIView-Positioning/tree/swift
+['master' branch]:https://github.com/freak4pc/UIView-Positioning/tree/master
