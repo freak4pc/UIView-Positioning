@@ -7,71 +7,87 @@
 
 import UIKit
 
-extension UIView{
+extension UIView {
     // MARK: - Basic Properties
-    var x:CGFloat{
-        set{ self.frame = CGRectMake(_pixelIntegral(newValue), self.y, self.width, self.height) }
-        get{ return self.frame.origin.x }
+    
+    /// X Axis value of UIView.
+    var x: CGFloat {
+        set { self.frame = CGRectMake(_pixelIntegral(newValue), self.y, self.width, self.height) }
+        get { return self.frame.origin.x }
     }
     
-    var y:CGFloat{
+    /// Y Axis value of UIView.
+    var y: CGFloat {
         set { self.frame = CGRectMake(self.x, _pixelIntegral(newValue), self.width, self.height) }
         get { return self.frame.origin.y }
     }
     
-    var width: CGFloat{
+    /// Width of view.
+    var width: CGFloat {
         set { self.frame = CGRectMake(self.x, self.y, _pixelIntegral(newValue), self.height) }
         get { return self.frame.size.width }
     }
     
-    var height: CGFloat{
+    /// Height of view.
+    var height: CGFloat {
         set { self.frame = CGRectMake(self.x, self.y, self.width, _pixelIntegral(newValue)) }
         get { return self.frame.size.height }
     }
     
     // MARK: - Origin and Size
-    var origin: CGPoint{
+    
+    /// View's origin point.
+    var origin: CGPoint {
         set { self.frame = CGRectMake(_pixelIntegral(newValue.x), _pixelIntegral(newValue.y), self.width, self.height) }
         get { return self.frame.origin }
     }
     
-    var size: CGSize{
+    /// View's size.
+    var size: CGSize {
         set { self.frame = CGRectMake(self.x, self.y, _pixelIntegral(newValue.width), _pixelIntegral(newValue.height)) }
         get { return self.frame.size }
     }
     
     // MARK: - Extra Properties
-    var right: CGFloat{
+    
+    /// View's right side (x + width).
+    var right: CGFloat {
         set { self.x = newValue - self.width }
         get { return self.x + self.width }
     }
     
-    var bottom: CGFloat{
+    /// View's bottom (y + height).
+    var bottom: CGFloat {
         set { self.y = newValue - self.height }
         get { return self.y + self.height }
     }
     
+    /// View's top (y).
     var top: CGFloat {
         set { self.y = newValue }
         get { return self.y }
     }
     
+    /// View's left side (x).
     var left: CGFloat {
         set { self.x = newValue }
         get { return self.x }
     }
     
-    var centerX: CGFloat{
+    /// View's center X value (center.x).
+    var centerX: CGFloat {
         set { self.center = CGPointMake(newValue, self.centerY) }
         get { return self.center.x }
     }
     
+    /// View's center Y value (center.y).
     var centerY: CGFloat {
         set { self.center = CGPointMake(self.centerX, newValue) }
         get { return self.center.y }
     }
     
-    var lastSubviewOnX:UIView?{
+    /// Last subview on X Axis.
+    var lastSubviewOnX:UIView? {
         get {
             var outView:UIView = self.subviews[0] as UIView
             
@@ -83,7 +99,8 @@ extension UIView{
         }
     }
     
-    var lastSubviewOnY:UIView?{
+    /// Last subview on Y Axis.
+    var lastSubviewOnY:UIView? {
         get {
             var outView:UIView = self.subviews[0] as UIView
             
@@ -96,27 +113,34 @@ extension UIView{
     }
     
     // MARK: - Bounds Methods
-    var boundsX:CGFloat{
+    
+    /// X value of bounds (bounds.origin.x).
+    var boundsX:CGFloat {
         set{ self.bounds = CGRectMake(_pixelIntegral(newValue), self.boundsY, self.boundsWidth, self.boundsHeight) }
         get{ return self.bounds.origin.x }
     }
     
-    var boundsY:CGFloat{
+    /// Y value of bounds (bounds.origin.y).
+    var boundsY:CGFloat {
         set { self.frame = CGRectMake(self.boundsX, _pixelIntegral(newValue), self.boundsWidth, self.boundsHeight) }
         get { return self.bounds.origin.y }
     }
     
-    var boundsWidth: CGFloat{
+    /// Width of bounds (bounds.size.width).
+    var boundsWidth: CGFloat {
         set { self.frame = CGRectMake(self.boundsX, self.boundsY, _pixelIntegral(newValue), self.boundsHeight) }
         get { return self.bounds.size.width }
     }
     
-    var boundsHeight: CGFloat{
+    /// Height of bounds (bounds.size.height).
+    var boundsHeight: CGFloat {
         set { self.frame = CGRectMake(self.boundsX, self.boundsY, self.boundsWidth, _pixelIntegral(newValue)) }
         get { return self.bounds.size.height }
     }
     
     // MARK: - Useful Methods
+    
+    /// Center view to it's parent view.
     func centerToParent(){
         if(self.superview != nil){
             switch(UIApplication.sharedApplication().statusBarOrientation){

@@ -1,5 +1,10 @@
 # Changelog for UIView+Positioning
 
+### 1.2
+- Swift version has been moved to the ['master' branch]
+- Swift 3 compatible version is now at the ['swift3' branch]
+- Podspecs finally properly updated
+
 ### 1.1
 
 - Swift version is now available in the ['swift' branch]
