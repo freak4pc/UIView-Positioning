@@ -7,70 +7,86 @@
 
 import UIKit
 
-extension UIView{
+extension UIView {
     // MARK: - Basic Properties
-    var x:CGFloat{
-        set{ self.frame = CGRectMake(_pixelIntegral(newValue), self.y, self.width, self.height) }
-        get{ return self.frame.origin.x }
+    
+    /// X Axis value of UIView.
+    var x: CGFloat {
+        set { self.frame = CGRect(x: _pixelIntegral(newValue), y: self.y, width: self.width, height: self.height) }
+        get { return self.frame.origin.x }
     }
     
-    var y:CGFloat{
-        set { self.frame = CGRectMake(self.x, _pixelIntegral(newValue), self.width, self.height) }
+    /// Y Axis value of UIView.
+    var y: CGFloat {
+        set { self.frame = CGRect(x: self.x, y: _pixelIntegral(newValue), width: self.width, height: self.height) }
         get { return self.frame.origin.y }
     }
     
-    var width: CGFloat{
-        set { self.frame = CGRectMake(self.x, self.y, _pixelIntegral(newValue), self.height) }
+    /// Width of view.
+    var width: CGFloat {
+        set { self.frame = CGRect(x: self.x, y: self.y, width: _pixelIntegral(newValue), height: self.height) }
         get { return self.frame.size.width }
     }
     
-    var height: CGFloat{
-        set { self.frame = CGRectMake(self.x, self.y, self.width, _pixelIntegral(newValue)) }
+    /// Height of view.
+    var height: CGFloat {
+        set { self.frame = CGRect(x: self.x, y: self.y, width: self.width, height: _pixelIntegral(newValue)) }
         get { return self.frame.size.height }
     }
     
     // MARK: - Origin and Size
-    var origin: CGPoint{
-        set { self.frame = CGRectMake(_pixelIntegral(newValue.x), _pixelIntegral(newValue.y), self.width, self.height) }
+    
+    /// View's Origin point.
+    var origin: CGPoint {
+        set { self.frame = CGRect(x: _pixelIntegral(newValue.x), y: _pixelIntegral(newValue.y), width: self.width, height: self.height) }
         get { return self.frame.origin }
     }
     
+    /// View's size.
     var size: CGSize{
-        set { self.frame = CGRectMake(self.x, self.y, _pixelIntegral(newValue.width), _pixelIntegral(newValue.height)) }
+        set { self.frame = CGRect(x: self.x, y: self.y, width: _pixelIntegral(newValue.width), height: _pixelIntegral(newValue.height)) }
         get { return self.frame.size }
     }
     
     // MARK: - Extra Properties
+    
+    /// View's right side (x + width).
     var right: CGFloat{
         set { self.x = newValue - self.width }
         get { return self.x + self.width }
     }
     
+    /// View's bottom (y + height).
     var bottom: CGFloat{
         set { self.y = newValue - self.height }
         get { return self.y + self.height }
     }
     
+    /// View's top (y).
     var top: CGFloat {
         set { self.y = newValue }
         get { return self.y }
     }
     
+    /// View's left side (x).
     var left: CGFloat {
         set { self.x = newValue }
         get { return self.x }
     }
     
-    var centerX: CGFloat{
-        set { self.center = CGPointMake(newValue, self.centerY) }
+    /// View's center X value (center.x).
+    var centerX: CGFloat {
+        set { self.center = CGPoint(x: newValue, y: self.centerY) }
         get { return self.center.x }
     }
     
+    /// View's center Y value (center.y).
     var centerY: CGFloat {
-        set { self.center = CGPointMake(self.centerX, newValue) }
+        set { self.center = CGPoint(x: self.centerX, y: newValue) }
         get { return self.center.y }
     }
     
+    /// Last subview on X Axis.
     var lastSubviewOnX:UIView?{
         get {
             var outView:UIView = self.subviews[0] as UIView
@@ -83,6 +99,7 @@ extension UIView{
         }
     }
     
+    /// Last subview on Y Axis.
     var lastSubviewOnY:UIView?{
         get {
             var outView:UIView = self.subviews[0] as UIView
@@ -96,49 +113,56 @@ extension UIView{
     }
     
     // MARK: - Bounds Methods
+    
+    /// X value of bounds (bounds.origin.x).
     var boundsX:CGFloat{
-        set{ self.bounds = CGRectMake(_pixelIntegral(newValue), self.boundsY, self.boundsWidth, self.boundsHeight) }
+        set{ self.bounds = CGRect(x: _pixelIntegral(newValue), y: self.boundsY, width: self.boundsWidth, height: self.boundsHeight) }
         get{ return self.bounds.origin.x }
     }
     
+    /// Y value of bounds (bounds.origin.y).
     var boundsY:CGFloat{
-        set { self.frame = CGRectMake(self.boundsX, _pixelIntegral(newValue), self.boundsWidth, self.boundsHeight) }
+        set { self.frame = CGRect(x: self.boundsX, y: _pixelIntegral(newValue), width: self.boundsWidth, height: self.boundsHeight) }
         get { return self.bounds.origin.y }
     }
     
+    /// Width of bounds (bounds.size.width).
     var boundsWidth: CGFloat{
-        set { self.frame = CGRectMake(self.boundsX, self.boundsY, _pixelIntegral(newValue), self.boundsHeight) }
+        set { self.frame = CGRect(x: self.boundsX, y: self.boundsY, width: _pixelIntegral(newValue), height: self.boundsHeight) }
         get { return self.bounds.size.width }
     }
     
+    /// Height of bounds (bounds.size.height).
     var boundsHeight: CGFloat{
-        set { self.frame = CGRectMake(self.boundsX, self.boundsY, self.boundsWidth, _pixelIntegral(newValue)) }
+        set { self.frame = CGRect(x: self.boundsX, y: self.boundsY, width: self.boundsWidth, height: _pixelIntegral(newValue)) }
         get { return self.bounds.size.height }
     }
     
     // MARK: - Useful Methods
+    
+    /// Center view to it's parent view.
     func centerToParent(){
         if(self.superview != nil){
-            switch(UIApplication.sharedApplication().statusBarOrientation){
-                case .LandscapeLeft:
+            switch(UIApplication.shared().statusBarOrientation){
+                case .landscapeLeft:
                     fallthrough
-                case .LandscapeRight:
-                    self.origin = CGPointMake((self.superview!.height / 2) - (self.width / 2),
-                                              (self.superview!.width / 2) - (self.height / 2))
-                case .Portrait:
+                case .landscapeRight:
+                    self.origin = CGPoint(x: (self.superview!.height / 2) - (self.width / 2),
+                                          y: (self.superview!.width / 2) - (self.height / 2))
+                case .portrait:
                     fallthrough
-                case .PortraitUpsideDown:
-                    self.origin = CGPointMake((self.superview!.width / 2) - (self.width / 2),
-                                              (self.superview!.height / 2) - (self.height / 2))
-                case .Unknown:
+                case .portraitUpsideDown:
+                    self.origin = CGPoint(x: (self.superview!.width / 2) - (self.width / 2),
+                                          y: (self.superview!.height / 2) - (self.height / 2))
+                case .unknown:
                     return
             }
         }
     }
     
     // MARK: - Private Methods
-    private func _pixelIntegral(pointValue:CGFloat) -> CGFloat{
-        let scale   = UIScreen.mainScreen().scale
+    private func _pixelIntegral(_ pointValue:CGFloat) -> CGFloat{
+        let scale   = UIScreen.main().scale
         return (round(pointValue * scale) / scale)
     }
 }
