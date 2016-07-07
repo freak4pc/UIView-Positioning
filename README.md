@@ -2,10 +2,6 @@ UIView-Positioning
 ================
 **UIView+Positioning** is a Swift Extension which provides easy shorthand methods to defining the frame properties (width, height, x, y) of any UIView based object in an easy fashion, as well as extra helpful properties and methods.
 
-Objective-C
------
-An Objective-C version is available in the ['master' branch]. If you're currently targeting iOS >= 7, you might as well use the Swift version which will most likely replace the Objecive-C version as time passes by.
-
 USAGE
 -----
 Just use the properties **x**, **y**, **width**, **height** or use **origin** and **size** to kill two birds with one stone ;-)
