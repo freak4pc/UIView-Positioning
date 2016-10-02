@@ -143,7 +143,7 @@ extension UIView {
     /// Center view to it's parent view.
     func centerToParent(){
         if(self.superview != nil){
-            switch(UIApplication.shared().statusBarOrientation){
+            switch(UIApplication.shared.statusBarOrientation){
                 case .landscapeLeft:
                     fallthrough
                 case .landscapeRight:
@@ -162,7 +162,7 @@ extension UIView {
     
     // MARK: - Private Methods
     private func _pixelIntegral(_ pointValue:CGFloat) -> CGFloat{
-        let scale   = UIScreen.main().scale
+        let scale   = UIScreen.main.scale
         return (round(pointValue * scale) / scale)
     }
 }
