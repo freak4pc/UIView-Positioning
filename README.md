@@ -1,9 +1,7 @@
-UIView-Positioning
-================
+# UIView-Positioning
 **UIView+Positioning** is a Swift Extension which provides easy shorthand methods to defining the frame properties (width, height, x, y) of any UIView based object in an easy fashion, as well as extra helpful properties and methods.
 
-USAGE
------
+### USAGE
 Just use the properties **x**, **y**, **width**, **height** or use **origin** and **size** to kill two birds with one stone ;-)
 
 ```swift
@@ -48,8 +46,7 @@ Will result in this:
 
 ![Fibonacci Views](http://i61.tinypic.com/29gmnih.jpg)
 
-AVAILABLE PROPERTIES & METHODS
------
+### AVAILABLE PROPERTIES & METHODS
 - **x**, **y**, **origin** - Positioning Shorthand
 - **width**, **height**, **size** - Sizing Shorthand
 - **left**, **bottom**, **top**, **right** - Representing X and Y values of the different sides of the view
@@ -60,12 +57,20 @@ AVAILABLE PROPERTIES & METHODS
 
 - **centerToParent** - Center the current view relatively to his superview, if one exists
 
-PORTS
------
+### INSTALLATION
+Add the following line to your `Podfile`:
+
+`pod 'UIView+Positioning', '~> 1.5'`
+
+and then run:
+
+`$ pod install`
+
+### PORTS
+
 * [UIView+Positioning for Xamarin] by [Cameron Ray (@camray)]
 
-LICENSE
--------------------
+### LICENSE
 
 Copyright (C) 2013 Developed by Shai Mishali
 
