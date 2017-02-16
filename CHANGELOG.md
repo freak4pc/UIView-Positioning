@@ -1,5 +1,8 @@
 # Changelog for UIView+Positioning
 
+### 1.4
+- Updated to support Swift 3.0
+
 ### 1.3
 - Swift version has been moved to the ['master' branch]
 - Swift 3 compatible version is now at the ['swift3' branch]
