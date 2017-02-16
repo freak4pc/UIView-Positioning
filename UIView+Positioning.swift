@@ -12,25 +12,25 @@ extension UIView {
     
     /// X Axis value of UIView.
     var x: CGFloat {
-        set { self.frame = CGRectMake(_pixelIntegral(newValue), self.y, self.width, self.height) }
+        set { self.frame = CGRect(x: _pixelIntegral(newValue), y: self.y, width: self.width, height: self.height) }
         get { return self.frame.origin.x }
     }
     
     /// Y Axis value of UIView.
     var y: CGFloat {
-        set { self.frame = CGRectMake(self.x, _pixelIntegral(newValue), self.width, self.height) }
+        set { self.frame = CGRect(x: self.x, y: _pixelIntegral(newValue), width: self.width, height: self.height) }
         get { return self.frame.origin.y }
     }
     
     /// Width of view.
     var width: CGFloat {
-        set { self.frame = CGRectMake(self.x, self.y, _pixelIntegral(newValue), self.height) }
+        set { self.frame = CGRect(x: self.x, y: self.y, width: _pixelIntegral(newValue), height: self.height) }
         get { return self.frame.size.width }
     }
     
     /// Height of view.
     var height: CGFloat {
-        set { self.frame = CGRectMake(self.x, self.y, self.width, _pixelIntegral(newValue)) }
+        set { self.frame = CGRect(x: self.x, y: self.y, width: self.width, height: _pixelIntegral(newValue)) }
         get { return self.frame.size.height }
     }
     
@@ -38,13 +38,13 @@ extension UIView {
     
     /// View's origin point.
     var origin: CGPoint {
-        set { self.frame = CGRectMake(_pixelIntegral(newValue.x), _pixelIntegral(newValue.y), self.width, self.height) }
+        set { self.frame = CGRect(x: _pixelIntegral(newValue.x), y: _pixelIntegral(newValue.y), width: self.width, height: self.height) }
         get { return self.frame.origin }
     }
     
     /// View's size.
     var size: CGSize {
-        set { self.frame = CGRectMake(self.x, self.y, _pixelIntegral(newValue.width), _pixelIntegral(newValue.height)) }
+        set { self.frame = CGRect(x: self.x, y: self.y, width: _pixelIntegral(newValue.width), height: _pixelIntegral(newValue.height)) }
         get { return self.frame.size }
     }
     
@@ -76,13 +76,13 @@ extension UIView {
     
     /// View's center X value (center.x).
     var centerX: CGFloat {
-        set { self.center = CGPointMake(newValue, self.centerY) }
+        set { self.center = CGPoint(x: newValue, y: self.centerY) }
         get { return self.center.x }
     }
     
     /// View's center Y value (center.y).
     var centerY: CGFloat {
-        set { self.center = CGPointMake(self.centerX, newValue) }
+        set { self.center = CGPoint(x: self.centerX, y: newValue) }
         get { return self.center.y }
     }
     
@@ -116,25 +116,25 @@ extension UIView {
     
     /// X value of bounds (bounds.origin.x).
     var boundsX:CGFloat {
-        set{ self.bounds = CGRectMake(_pixelIntegral(newValue), self.boundsY, self.boundsWidth, self.boundsHeight) }
+        set{ self.bounds = CGRect(x: _pixelIntegral(newValue), y: self.boundsY, width: self.boundsWidth, height: self.boundsHeight) }
         get{ return self.bounds.origin.x }
     }
     
     /// Y value of bounds (bounds.origin.y).
     var boundsY:CGFloat {
-        set { self.frame = CGRectMake(self.boundsX, _pixelIntegral(newValue), self.boundsWidth, self.boundsHeight) }
+        set { self.frame = CGRect(x: self.boundsX, y: _pixelIntegral(newValue), width: self.boundsWidth, height: self.boundsHeight) }
         get { return self.bounds.origin.y }
     }
     
     /// Width of bounds (bounds.size.width).
     var boundsWidth: CGFloat {
-        set { self.frame = CGRectMake(self.boundsX, self.boundsY, _pixelIntegral(newValue), self.boundsHeight) }
+        set { self.frame = CGRect(x: self.boundsX, y: self.boundsY, width: _pixelIntegral(newValue), height: self.boundsHeight) }
         get { return self.bounds.size.width }
     }
     
     /// Height of bounds (bounds.size.height).
     var boundsHeight: CGFloat {
-        set { self.frame = CGRectMake(self.boundsX, self.boundsY, self.boundsWidth, _pixelIntegral(newValue)) }
+        set { self.frame = CGRect(x: self.boundsX, y: self.boundsY, width: self.boundsWidth, height: _pixelIntegral(newValue)) }
         get { return self.bounds.size.height }
     }
     
@@ -143,26 +143,26 @@ extension UIView {
     /// Center view to it's parent view.
     func centerToParent(){
         if(self.superview != nil){
-            switch(UIApplication.sharedApplication().statusBarOrientation){
-                case .LandscapeLeft:
-                    fallthrough
-                case .LandscapeRight:
-                    self.origin = CGPointMake((self.superview!.height / 2) - (self.width / 2),
-                                              (self.superview!.width / 2) - (self.height / 2))
-                case .Portrait:
-                    fallthrough
-                case .PortraitUpsideDown:
-                    self.origin = CGPointMake((self.superview!.width / 2) - (self.width / 2),
-                                              (self.superview!.height / 2) - (self.height / 2))
-                case .Unknown:
-                    return
+            switch(UIApplication.shared.statusBarOrientation){
+            case .landscapeLeft:
+                fallthrough
+            case .landscapeRight:
+                self.origin = CGPoint(x: (self.superview!.height / 2) - (self.width / 2),
+                                      y: (self.superview!.width / 2) - (self.height / 2))
+            case .portrait:
+                fallthrough
+            case .portraitUpsideDown:
+                self.origin = CGPoint(x: (self.superview!.width / 2) - (self.width / 2),
+                                      y: (self.superview!.height / 2) - (self.height / 2))
+            case .unknown:
+                return
             }
         }
     }
     
     // MARK: - Private Methods
-    private func _pixelIntegral(pointValue:CGFloat) -> CGFloat{
-        let scale   = UIScreen.mainScreen().scale
+    fileprivate func _pixelIntegral(_ pointValue:CGFloat) -> CGFloat{
+        let scale   = UIScreen.main.scale
         return (round(pointValue * scale) / scale)
     }
 }
