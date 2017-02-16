@@ -1,8 +1,15 @@
 # Changelog for UIView+Positioning
 
+### 1.5
+- Swift 3 version is now the master branch.
+- Swift 2.3 version (deprecated) is on its own swift-2.3 branch
+- Minor fixes and formatting issues.
+
+Thanks for the previous PRs @cameronehrlich, @abuassar, @vinnyt ! :-)
+
 ### 1.3
-- Swift version has been moved to the ['master' branch]
-- Swift 3 compatible version is now at the ['swift3' branch]
+- Swift version has been moved to the 'master' branch
+- Swift 3 compatible version is now at the 'swift3' branch
 - Podspecs finally properly updated
 
 ### 1.1
@@ -25,5 +32,3 @@
 
 - Category was renamed from UIView+QuickRect to UIView+Positioning
 - Fixed up the README file to include
-
-['swift' branch]:https://github.com/freak4pc/UIView-Positioning/tree/swift

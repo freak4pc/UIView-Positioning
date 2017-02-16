@@ -18,24 +18,24 @@ btnTest.x      += 35
 btnTest.centerX = 20
 btnTest.centerY = 15
 
-btnTest.size    = CGSizeMake(150, 70)
-btnTest.origin  = CGPointMake(25, 10)
+btnTest.size    = CGSize(width: 150, height: 70)
+btnTest.origin  = CGPoint(x: 25, y: 10)
 
-println(btnTest.lastSubviewOnX?.x)  // X value of the object with the largest X value
-println(btnTest.lastSubviewOnY?.y)  // Y value of the object with the largest Y value
+print(btnTest.lastSubviewOnX?.x)  // X value of the object with the largest X value
+print(btnTest.lastSubviewOnY?.y)  // Y value of the object with the largest Y value
 
-btnTest.centerToParent()            // Centers button to its parent view, if exists
+btnTest.centerToParent()          // Centers button to its parent view, if exists
 ```
 
 Here's another short example of using **centerToParent** and the Fibonacci Series to create multiple subviewed squares
 ```swift
-weak var currentView            = self.view
-var currentSize:CGFloat         = 300
+var currentView                 = self.view
+var currentSize: CGFloat        = 300
 
-for i in 0...12{
+for i in 0...12 {
     let newView                 = UIView()
-    newView.size                = CGSizeMake(currentSize, currentSize)
-    newView.backgroundColor     = UIColor.randomColor()
+    newView.size                = CGSize(width: currentSize, height: currentSize)
+    newView.backgroundColor     = UIColor.random
     currentView?.addSubview(newView)
     newView.centerToParent()
 
@@ -89,4 +89,3 @@ THE SOFTWARE.
 
 [UIView+Positioning for Xamarin]:https://github.com/camray/Xamarin-UIView-Positioning
 [Cameron Ray (@camray)]:https://github.com/camray
-['master' branch]:https://github.com/freak4pc/UIView-Positioning/tree/master
