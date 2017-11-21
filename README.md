@@ -60,7 +60,7 @@ Will result in this:
 ### INSTALLATION
 Add the following line to your `Podfile`:
 
-`pod 'UIView+Positioning', '~> 1.5'`
+`pod 'UIView+Positioning'`
 
 and then run:
 
